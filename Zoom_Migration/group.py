@@ -15,7 +15,7 @@ function to create a group on a specified account with a specified group name
 """
 def create_group(accountID, groupName):
     logging.info("Create Group")
-    url = '/accounts/%s/groups' % accountID
+    url = '/groups'
     print(url)
     payload = {'name' : '%s' % groupName}
     response = app.send_post_request(url, json.dumps(payload), accountID)
@@ -29,7 +29,7 @@ Need to modify to allow disabling of certain groups
 def list_groups(accountID):
     logging.info("List Groups")
     groups = []
-    url = '/v2/accounts/%s/groups' % accountID
+    url = '/groups'
     response = app.send_get_request(url, accountID)
     print('response is : %s' % response)
     encoded_data=json.loads(response)
@@ -44,7 +44,7 @@ get settings from a specified group on a specified acount
 """
 def get_group_settings(accountID, group):
     logging.info("Get Group Settings")
-    url = '/accounts/%s/groups/%s/settings' % accountID, group
+    url = 'groups/%s/settings' % group
     response = app.send_get_request(url, accountID)
     return(response)
 
@@ -53,7 +53,7 @@ update the settings of a specified group on a specified account with a specified
 """
 def update_group_settings(accountID, group, payload):
     logging.info("Update Group Settings: %s : %s" % accountID, group)
-    url = '/accounts/%s/groups/%s/settings' % accountID, group
+    url = '/groups/%s/settings' % group
     response = app.send_patch_request(url, json.dumps(payload), accountID)
     return(response)
 

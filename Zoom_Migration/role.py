@@ -16,7 +16,7 @@ get a value from the response of list roles and add it to a list and return that
 def get_role_value(fromAccount, key):
     logging.info("Get Roles")
     values = []
-    url = '/accounts/%s/roles/' % fromAccount
+    url = '/roles/'
     response = app.send_get_request(url, fromAccount)
     encoded_data=json.loads(response)
     for item in encoded_data['roles']:
@@ -30,7 +30,7 @@ Get the settings of a particular role and return them
 """
 def get_role_settings(fromAccount, roleID):
     logging.info("Get Role Settings")
-    url = '/accounts/%s/roles/%s' % fromAccount, roleID
+    url = '/roles/%s' % roleID
     response = app.send_get_request(url, fromAccount)
     return(response)
 
@@ -39,7 +39,7 @@ Update the settings of a specific role
 """
 def update_role_settings(accountID, roleID, payload):
     logging.info("update role settings")
-    url = '/accounts/%s/roles/%s' % accountID, roleID
+    url = '/roles/%s' % roleID
     payload = payload 
     response = app.send_patch_request(url, payload, accountID)
     return(response)
@@ -49,7 +49,7 @@ Create a role
 """
 def create_role(accountID, name):
     logging.info("Create Role")
-    url = '/v2/accounts/%s/roles' % accountID
+    url = '/roles'
     payload = {"name" : "%s" % name} 
     response = app.send_post_request(url, payload, accountID)
     return(response)
